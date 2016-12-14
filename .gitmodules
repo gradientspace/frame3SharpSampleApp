@@ -1,0 +1,6 @@
+[submodule "Assets/geometry3Sharp"]
+	path = Assets/geometry3Sharp
+	url = https://github.com/gradientspace/geometry3Sharp
+[submodule "Assets/frame3Sharp"]
+	path = Assets/frame3Sharp
+	url = https://github.com/gradientspace/frame3Sharp
