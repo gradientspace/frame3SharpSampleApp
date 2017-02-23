@@ -12,7 +12,7 @@ namespace f3
     public class DropPrimitiveButton : HUDButton
     {
         public FScene TargetScene { get; set; }
-        public Func<TransformableSceneObject> CreatePrimitive { get; set; }
+        public Func<TransformableSO> CreatePrimitive { get; set; }
 
         public DropPrimitiveButton()
         {
@@ -36,7 +36,7 @@ namespace f3
 
         Frame3f lastHitF;
         SceneObject lastHitObject;
-        TransformableSceneObject newPrimitive;
+        TransformableSO newPrimitive;
         float fPrimShift;
         float fPrimScale;
 
@@ -51,12 +51,12 @@ namespace f3
             // rotation around normal. 
             Frame3f hitF = TargetScene.SceneFrame;
             Vector3 targetAxis = hitF.GetAxis(1);
-            if (hit.hitSO is TransformableSceneObject)
-                hitF = (hit.hitSO as TransformableSceneObject).GetLocalFrame(CoordSpace.WorldCoords);
+            if (hit.hitSO is TransformableSO)
+                hitF = (hit.hitSO as TransformableSO).GetLocalFrame(CoordSpace.WorldCoords);
             bool bUseLocal = 
-                (TargetScene.ActiveController.TransformManager.ActiveFrameType == FrameType.LocalFrame);
-            if (bUseLocal && hit.hitSO is TransformableSceneObject) {
-                hitF = (hit.hitSO as TransformableSceneObject).GetLocalFrame(CoordSpace.WorldCoords);
+                (TargetScene.Context.TransformManager.ActiveFrameType == FrameType.LocalFrame);
+            if (bUseLocal && hit.hitSO is TransformableSO) {
+                hitF = (hit.hitSO as TransformableSO).GetLocalFrame(CoordSpace.WorldCoords);
                 targetAxis = hitF.GetAxis(1);
             }
             // if normal is parallel to target, this would become unstable, so use another axis
@@ -108,7 +108,7 @@ namespace f3
                             newPrimitive.SetLocalScale(fPrimScale * Vector3f.One);
                         }
                     }
-                    fPrimShift = newPrimitive.GetLocalBoundingBox().extents[1] * TargetScene.GetSceneScale();
+                    fPrimShift = newPrimitive.GetLocalBoundingBox().Extents[1] * TargetScene.GetSceneScale();
                 }
 
                 // [RMS] this is kind of cheating - we are going to tell this SO
@@ -128,7 +128,7 @@ namespace f3
                     fPrimScale = fPrimScale * (1.0f + vStick[1] * 0.1f);
                     fPrimScale = MathUtil.Clamp(fPrimScale, 0.01f, 10.0f);
                     newPrimitive.SetLocalScale(fPrimScale * Vector3f.One);
-                    fPrimShift = newPrimitive.GetLocalBoundingBox().extents[1] * TargetScene.GetSceneScale();
+                    fPrimShift = newPrimitive.GetLocalBoundingBox().Extents[1] * TargetScene.GetSceneScale();
                 }
             }
 

@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using f3;
+using g3;
 
 class SetupBasicVRCockpit : ICockpitInitializer
 {
-
-
-
- 
-
-
-
-
 
 
     public void Initialize(Cockpit cockpit)
@@ -129,7 +122,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
     DropPrimitiveButton add_primitive_button(Cockpit cockpit, string sName, float fHUDRadius, float dx, float dy,
         PrimitiveType primType, SOType soType, float fPrimRadiusScale,
         Material bgMaterial, Material primMaterial,
-        Func<TransformableSceneObject> CreatePrimitiveF,
+        Func<TransformableSO> CreatePrimitiveF,
         IGameObjectGenerator customGenerator = null
         )
     {
@@ -236,10 +229,10 @@ class SetupBasicVRCockpit : ICockpitInitializer
 
                 // CENTER TARGET (??)
             } else if (Input.GetKeyUp(KeyCode.C)) {
-                Ray cursorRay = context.GetWorldRayAtMouseCursor();
+                Ray3f cursorRay = context.MouseController.CurrentCursorWorldRay();
                 AnyRayHit hit = null;
                 if (context.Scene.FindSceneRayIntersection(cursorRay, out hit)) {
-                    context.ActiveCamera.Manipulator().ScenePanFocus(context.ActiveCamera, hit.hitPos);
+                    context.ActiveCamera.Manipulator().ScenePanFocus(context.Scene, context.ActiveCamera, hit.hitPos, true);
                 }
                 return true;
 
@@ -268,10 +261,10 @@ class SetupBasicVRCockpit : ICockpitInitializer
                 // show/hide (should be abstracted somehow?? instead of directly accessing GOs?)
                 if (bShiftDown) {
                     foreach (SceneObject so in context.Scene.SceneObjects)
-                        UnityUtil.Show(so.RootGameObject);
+                        so.RootGameObject.Show();
                 } else {
                     foreach (SceneObject so in context.Scene.Selected)
-                        UnityUtil.Hide(so.RootGameObject);
+                        so.RootGameObject.Hide();
                     context.Scene.ClearSelection();
                 }
                 return true;
