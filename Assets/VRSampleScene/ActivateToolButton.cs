@@ -6,7 +6,9 @@ using g3;
 namespace f3
 {
     //
-    //
+    // This is a button that initializes a tool when it is clicked, and 
+    // gets a highlight
+    // 
     public class ActivateToolButton : HUDButton
     {
         public FScene TargetScene { get; set; }

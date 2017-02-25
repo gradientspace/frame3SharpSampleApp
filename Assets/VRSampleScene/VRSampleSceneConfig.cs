@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using f3;
+using g3;
 
 public class VRSampleSceneConfig : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class VRSampleSceneConfig : MonoBehaviour
     {
         // restore any settings
         SceneGraphConfig.RestorePreferences();
+
+        // don't auto-translate the scene (perhaps this should be the default?)
+        SceneGraphConfig.InitialSceneTranslate = Vector3f.Zero;
 
         SceneOptions options = new SceneOptions();
         options.EnableTransforms = true;
@@ -43,9 +47,36 @@ public class VRSampleSceneConfig : MonoBehaviour
         GameObject lighting = GameObject.Find("SceneLighting");
         lighting.GetComponent<SceneLightingSetup>().Scene = context;
 
-        // set up ground plane geometry
+
+        /*
+         * Import elements of Unity scene that already exist into the FScene
+         */
+
+        // set up ground plane geometry (optional)
         GameObject groundPlane = GameObject.Find("GroundPlane");
         context.Scene.AddWorldBoundsObject(groundPlane);
+
+
+        // wrap existing complex GameObject named capsule1 as a SceneObject
+        GameObject capsuleGO = GameObject.Find("capsule1");
+        TransformableSO capsuleSO = UnitySceneUtil.WrapAnyGameObject(capsuleGO, context, true);
+
+        // wrap a prefab as a GOWrapperSO
+        GameObject prefabGO = GameObject.Find("bunny_prefab");
+        TransformableSO prefabSO = UnitySceneUtil.WrapAnyGameObject(prefabGO, context, false);
+
+        // convert a mesh GameObject to our DMeshSO
+        // Note: any child GameObjects will be lost
+        GameObject meshGO = GameObject.Find("bunny_mesh");
+        DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
+
+
+
+        // center the camera on the capsule assembly
+        Vector3f centerPt = capsuleSO.GetLocalFrame(CoordSpace.WorldCoords).Origin;
+        context.ActiveCamera.Manipulator().ScenePanFocus(
+            context.Scene, context.ActiveCamera, centerPt, true);
+
     }
 
     // Update is called once per frame

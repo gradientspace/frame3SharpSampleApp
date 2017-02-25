@@ -34,7 +34,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
             MaterialUtil.CreateStandardMaterial(bgColor) : MaterialUtil.CreateTransparentMaterial(bgColor);
         Material primMaterial = MaterialUtil.CreateStandardMaterial(Color.yellow);
 
-        float fButtonsY = -30.0f; // degrees
+        float fButtonsY = -50.0f; // degrees
         float fButtonsSpacing = 15.0f;
         float fPrimitivesX = -35.0f; 
 
