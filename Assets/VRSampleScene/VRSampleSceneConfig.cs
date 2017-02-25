@@ -6,7 +6,7 @@ using g3;
 
 public class VRSampleSceneConfig : MonoBehaviour
 {
-    public GameObject OculusCameraRig;
+    public GameObject VRCameraRig;
 
     FContext context;
 
@@ -25,7 +25,7 @@ public class VRSampleSceneConfig : MonoBehaviour
         options.CockpitInitializer = new SetupBasicVRCockpit();
 
         options.MouseCameraControls = new MayaCameraHotkeys();
-        options.SpatialCameraRig = OculusCameraRig;
+        options.SpatialCameraRig = VRCameraRig;
 
         // very verbose
         options.LogLevel = 2;
@@ -61,27 +61,34 @@ public class VRSampleSceneConfig : MonoBehaviour
         GameObject groundPlane = GameObject.Find("GroundPlane");
         context.Scene.AddWorldBoundsObject(groundPlane);
 
+        TransformableSO focusSO = null;
 
         // wrap existing complex GameObject named capsule1 as a SceneObject
         GameObject capsuleGO = GameObject.Find("capsule1");
-        TransformableSO capsuleSO = UnitySceneUtil.WrapAnyGameObject(capsuleGO, context, true);
+        if (capsuleGO != null) {
+            TransformableSO capsuleSO = UnitySceneUtil.WrapAnyGameObject(capsuleGO, context, true);
+            focusSO = capsuleSO;
+        }
 
         // wrap a prefab as a GOWrapperSO
         GameObject prefabGO = GameObject.Find("bunny_prefab");
-        /*TransformableSO prefabSO =*/ UnitySceneUtil.WrapAnyGameObject(prefabGO, context, false);
+        if ( prefabGO != null ) 
+            UnitySceneUtil.WrapAnyGameObject(prefabGO, context, false);
 
         // convert a mesh GameObject to our DMeshSO
         // Note: any child GameObjects will be lost
         GameObject meshGO = GameObject.Find("bunny_mesh");
-        UnitySceneUtil.WrapMeshGameObject(meshGO, context, true);
-        //DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
-
-
+        if (meshGO != null) {
+            //DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
+            UnitySceneUtil.WrapMeshGameObject(meshGO, context, true);
+        }
 
         // center the camera on the capsule assembly
-        Vector3f centerPt = capsuleSO.GetLocalFrame(CoordSpace.WorldCoords).Origin;
-        context.ActiveCamera.Manipulator().ScenePanFocus(
-            context.Scene, context.ActiveCamera, centerPt, true);
+        if (focusSO != null) {
+            Vector3f centerPt = focusSO.GetLocalFrame(CoordSpace.WorldCoords).Origin;
+            context.ActiveCamera.Manipulator().ScenePanFocus(
+                context.Scene, context.ActiveCamera, centerPt, true);
+        }
 
     }
 
