@@ -41,11 +41,16 @@ public class VRSampleSceneConfig : MonoBehaviour
         context.ToolManager.RegisterToolType(DrawPrimitivesTool.Identifier, new DrawPrimitivesToolBuilder());
         context.ToolManager.SetActiveToolType(DrawPrimitivesTool.Identifier, ToolSide.Right);
 
-        // set Scene object in our scripts because I can't seem to do it in Inspector anymore??
-        // perhaps we could do the script part of these in code, then 
-        // we would just need to know the object names...
-        GameObject lighting = GameObject.Find("SceneLighting");
-        lighting.GetComponent<SceneLightingSetup>().Scene = context;
+        // Set up standard scene lighting if requested
+        if ( options.EnableDefaultLighting ) {
+            GameObject lighting = GameObject.Find("SceneLighting");
+            if (lighting == null)
+                lighting = new GameObject("SceneLighting");
+            SceneLightingSetup setup = lighting.AddComponent<SceneLightingSetup>();
+            setup.Context = context;
+            setup.LightDistance = 30.0f; // related to total scene scale...
+        }
+
 
 
         /*
