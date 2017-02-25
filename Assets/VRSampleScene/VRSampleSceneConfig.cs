@@ -63,12 +63,13 @@ public class VRSampleSceneConfig : MonoBehaviour
 
         // wrap a prefab as a GOWrapperSO
         GameObject prefabGO = GameObject.Find("bunny_prefab");
-        TransformableSO prefabSO = UnitySceneUtil.WrapAnyGameObject(prefabGO, context, false);
+        /*TransformableSO prefabSO =*/ UnitySceneUtil.WrapAnyGameObject(prefabGO, context, false);
 
         // convert a mesh GameObject to our DMeshSO
         // Note: any child GameObjects will be lost
         GameObject meshGO = GameObject.Find("bunny_mesh");
-        DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
+        UnitySceneUtil.WrapMeshGameObject(meshGO, context, true);
+        //DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
 
 
 
