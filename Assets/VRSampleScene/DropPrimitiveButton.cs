@@ -122,7 +122,8 @@ namespace f3
                 newPrimitive.SetLocalFrame(lastHitF.Translated(fPrimShift,1), CoordSpace.WorldCoords);
             }
 
-            if (e.device == InputDevice.OculusTouch && newPrimitive is PrimitiveSO) {
+            // [RMS] only Touch for this??
+            if ( InputState.IsDevice(e.device, InputDevice.OculusTouch) && newPrimitive is PrimitiveSO) {
                 Vector2f vStick = e.input.StickDelta2D((int)e.side);
                 if (vStick[1] != 0) {
                     fPrimScale = fPrimScale * (1.0f + vStick[1] * 0.1f);

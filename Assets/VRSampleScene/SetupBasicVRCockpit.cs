@@ -176,7 +176,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
 
         if (info.identifier == "cancel") {
             button.OnClicked += (s, e) => {
-                int nSide = (e.device == InputDevice.OculusTouch) ? (int)e.side : 1;
+                int nSide = InputState.IsHandedDevice(e.device) ? (int)e.side : 1;
                 cockpit.Context.ToolManager.DeactivateTool((ToolSide)nSide);
                 if (activeButtons[nSide] != null) {
                     activeButtons[nSide].SetBackgroundMaterial(bgMaterial);
@@ -185,7 +185,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
             };
         } else {
             button.OnClicked += (s, e) => {
-                int nSide = (e.device == InputDevice.OculusTouch) ? (int)e.side : 1;
+                int nSide = InputState.IsHandedDevice(e.device) ? (int)e.side : 1;
                 cockpit.Context.ToolManager.SetActiveToolType(info.identifier, (ToolSide)nSide);
                 cockpit.Context.ToolManager.ActivateTool((ToolSide)nSide);
                 if (activeButtons[nSide] != null)
