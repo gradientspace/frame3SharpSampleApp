@@ -4,15 +4,23 @@ using System.Collections.Generic;
 using f3;
 using g3;
 
-public class VRSampleSceneConfig : MonoBehaviour
+public class VRSampleSceneConfig : BaseSceneConfig
 {
     public GameObject VRCameraRig;
 
     FContext context;
+    public override FContext Context { get { return context; } }
 
     // Use this for initialization
     void Awake()
     {
+        // if we need to auto-configure Rift vs Vive vs (?) VR, we need
+        // to do this before any other F3 setup, because MainCamera will change
+        // and we are caching that in a lot of places...
+        if (AutoConfigVR) {
+            VRCameraRig = VRPlatform.AutoConfigureVR();
+        }
+
         // restore any settings
         SceneGraphConfig.RestorePreferences();
 
