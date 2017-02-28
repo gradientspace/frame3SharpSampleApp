@@ -25,7 +25,7 @@ public class VRSampleSceneConfig : BaseSceneConfig
         SceneGraphConfig.RestorePreferences();
 
         // don't auto-translate the scene (perhaps this should be the default?)
-        SceneGraphConfig.InitialSceneTranslate = Vector3f.Zero;
+        //SceneGraphConfig.InitialSceneTranslate = Vector3f.Zero;
 
         SceneOptions options = new SceneOptions();
         options.EnableTransforms = true;
