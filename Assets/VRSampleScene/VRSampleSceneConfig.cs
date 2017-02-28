@@ -100,12 +100,6 @@ public class VRSampleSceneConfig : BaseSceneConfig
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        context.Update();
-    }
-
 
 
 }
