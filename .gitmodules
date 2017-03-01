@@ -4,3 +4,6 @@
 [submodule "Assets/frame3Sharp"]
 	path = Assets/frame3Sharp
 	url = https://github.com/gradientspace/frame3Sharp
+[submodule "Assets/gsUnityVR"]
+	path = Assets/gsUnityVR
+	url = https://github.com/gradientspace/gsUnityVR
