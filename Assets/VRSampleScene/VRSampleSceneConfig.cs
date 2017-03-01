@@ -18,7 +18,7 @@ public class VRSampleSceneConfig : BaseSceneConfig
         // to do this before any other F3 setup, because MainCamera will change
         // and we are caching that in a lot of places...
         if (AutoConfigVR) {
-            VRCameraRig = VRPlatform.AutoConfigureVR();
+            VRCameraRig = gs.VRPlatform.AutoConfigureVR();
         }
 
         // restore any settings
