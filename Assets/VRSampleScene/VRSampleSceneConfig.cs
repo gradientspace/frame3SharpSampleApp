@@ -91,6 +91,12 @@ public class VRSampleSceneConfig : BaseSceneConfig
             UnitySceneUtil.WrapMeshGameObject(meshGO, context, true);
         }
 
+        GameObject meshGO2 = GameObject.Find("bunny_mesh2");
+        if (meshGO2 != null) {
+            //DMeshSO meshSO = UnitySceneUtil.WrapMeshGameObject(meshGO, context, true) as DMeshSO;
+            UnitySceneUtil.WrapMeshGameObject(meshGO2, context, true);
+        }
+
         // center the camera on the capsule assembly
         if (focusSO != null) {
             Vector3f centerPt = focusSO.GetLocalFrame(CoordSpace.WorldCoords).Origin;

@@ -291,6 +291,13 @@ class SetupBasicVRCockpit : ICockpitInitializer
                 }
                 return true;
 
+            } else if (Input.GetKeyUp(KeyCode.M)) {
+                List<SceneObject> selected = new List<SceneObject>(context.Scene.Selected);
+                if (selected.Count == 2 && selected[0] is DMeshSO && selected[1] is DMeshSO)
+                    SceneUtil.CombineSO(selected[0] as DMeshSO, selected[1] as DMeshSO);
+                return true;
+
+ 
 
             } else
                 return false;
