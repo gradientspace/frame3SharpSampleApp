@@ -291,13 +291,25 @@ class SetupBasicVRCockpit : ICockpitInitializer
                 }
                 return true;
 
-            } else if (Input.GetKeyUp(KeyCode.M)) {
+             } else if (bCtrlDown && Input.GetKeyUp(KeyCode.M)) {
                 List<SceneObject> selected = new List<SceneObject>(context.Scene.Selected);
-                if (selected.Count == 2 && selected[0] is DMeshSO && selected[1] is DMeshSO)
-                    SceneUtil.CombineSO(selected[0] as DMeshSO, selected[1] as DMeshSO);
+
+                // combine two selected SOs into a GroupSO
+                if (selected.Count == 2)
+                    SceneUtil.CreateGroupSO(selected[0] as TransformableSO, selected[1] as TransformableSO);
+
+                // [RMS] alternative, does deep-copy of internal GOs. This works OK except
+                //   that the frame of the combined object ends up at the origin...
+                //if (selected.Count == 2)
+                //    SceneUtil.CombineAnySOs(selected[0], selected[1]);
                 return true;
 
- 
+            } else if (Input.GetKeyUp(KeyCode.M)) {
+                // combine two DMeshSOs into a Dnew MeshSO
+                List<SceneObject> selected = new List<SceneObject>(context.Scene.Selected);
+                if (selected.Count == 2 && selected[0] is DMeshSO && selected[1] is DMeshSO)
+                    SceneUtil.AppendMeshSO(selected[0] as DMeshSO, selected[1] as DMeshSO);
+                return true;
 
             } else
                 return false;
