@@ -13,7 +13,8 @@ Basic VR interface where you can add Boxes and Cylinders via either double-click
 
 You can also select primitives in the scene and move them using the 3D manipulator gizmo. Undo/Redo is supported with Ctrl+Z.
 
-There are several scenes provided with different configurations. All of these scenes support mouse and gamepad input.
+There are several scenes provided with different configurations. All of these scenes support mouse and gamepad input. Several support spatial input with the Oculus Touch or Vive Wands. For details on how to use those controllers, see the [Simplex Touch Manual](http://www.gradientspace.com/simplex-touch-controls). Vive usage is similar. Not everything is included, but you can Grab Objects using the trigger+shoulder buttons (separate object with each hand!)
+
 
 **AutoVRSampleScene** supports both Vive and Rift, and auto-configures for either using the [gsUnityVR](https://github.com/gradientspace/gsUnityVR) library. After the auto-configuration, the hand-tracked controllers can be used to interact with the scene. 
 
