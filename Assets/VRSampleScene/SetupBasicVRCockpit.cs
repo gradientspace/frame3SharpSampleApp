@@ -96,6 +96,10 @@ class SetupBasicVRCockpit : ICockpitInitializer
         cockpit.InputBehaviors.Add(new GamepadDeselectBehavior(cockpit.Context) { Priority = 999 });
         cockpit.InputBehaviors.Add(new SpatialDeviceDeselectBehavior(cockpit.Context) { Priority = 999 });
 
+        // screencap to your dropbox
+        cockpit.OverrideBehaviors.Add(new ScreenCaptureBehavior() { Priority = 0,
+            ScreenshotPath = Environment.GetEnvironmentVariable("homepath") + "\\DropBox\\ScreenShots\\" });
+
     }
 
 

@@ -22,7 +22,7 @@ namespace f3
         // creates a button with a floating primitive in front of the button shape
         public void Create(float fRadius, Material bgMaterial)
         {
-            Shape = new HUDShape() { Type = HUDShapeType.Disc, Radius = fRadius };
+            Shape = new HUDShape(HUDShapeType.Disc, fRadius );
             base.Create(bgMaterial);
         }
 

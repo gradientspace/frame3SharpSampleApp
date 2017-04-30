@@ -23,7 +23,7 @@ namespace f3
         public void CreateMeshIconButton(float fRadius, string sMeshPath, Material bgMaterial, 
             float fMeshScaleFudge )
         {
-            Shape = new HUDShape() { Type = HUDShapeType.Disc, Radius = fRadius };
+            Shape = new HUDShape(HUDShapeType.Disc, fRadius );
 
             Mesh iconmesh = null;
             Material meshMaterial = null;

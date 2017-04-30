@@ -24,10 +24,17 @@ public class VRSampleSceneConfig : BaseSceneConfig
         // restore any settings
         SceneGraphConfig.RestorePreferences();
 
-        // don't auto-translate the scene (perhaps this should be the default?)
-        SceneGraphConfig.InitialSceneTranslate = Vector3f.Zero;
+        // set up some defaults
+        // this will move the ground plane down, but the bunnies will be floating...
+        //SceneGraphConfig.InitialSceneTranslate = -4.0f * Vector3f.AxisY;
+        SceneGraphConfig.DefaultSceneCurveVisualDegrees = 0.5f;
+        SceneGraphConfig.DefaultPivotVisualDegrees = 2.3f;
+        SceneGraphConfig.DefaultAxisGizmoVisualDegrees = 25.0f;
+
 
         SceneOptions options = new SceneOptions();
+        options.UseSystemMouseCursor = false;
+        options.Use2DCockpit = false;
         options.EnableTransforms = true;
         options.EnableCockpit = true;
         options.CockpitInitializer = new SetupBasicVRCockpit();
