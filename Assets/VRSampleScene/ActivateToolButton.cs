@@ -25,10 +25,10 @@ namespace f3
         {
             Shape = new HUDShape(HUDShapeType.Disc, fRadius );
 
-            Mesh iconmesh = null;
+            fMesh iconmesh = null;
             Material meshMaterial = null;
             try {
-                iconmesh = Resources.Load<Mesh>(sMeshPath);
+                iconmesh = FResources.LoadMesh(sMeshPath);
                 meshMaterial = MaterialUtil.CreateStandardVertexColorMaterial(Color.white);
             } catch { }
             if ( iconmesh == null ) {

@@ -113,13 +113,13 @@ class SetupBasicVRCockpit : ICockpitInitializer
         public PrimitiveType PrimType { get; set; }
         public Material PrimMaterial { get; set; }
         public float PrimSize { get; set; }
-        virtual public List<GameObject> Generate()
+        virtual public List<fGameObject> Generate()
         {
             GameObject primGO = UnityUtil.CreatePrimitiveGO("primitive", PrimType, PrimMaterial, true);
             primGO.transform.localScale = new Vector3(PrimSize, PrimSize, PrimSize);
             primGO.transform.Translate(0.0f, 0.0f, -PrimSize);
             primGO.transform.Rotate(-15.0f, 45.0f, 0.0f, Space.Self);
-            return new List<GameObject>() { primGO };
+            return new List<fGameObject>() { primGO };
         }
     }
 
