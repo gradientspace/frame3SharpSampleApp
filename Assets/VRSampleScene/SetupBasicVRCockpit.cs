@@ -127,7 +127,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
     DropPrimitiveButton add_primitive_button(Cockpit cockpit, string sName, float fHUDRadius, float dx, float dy,
         PrimitiveType primType, SOType soType, float fPrimRadiusScale,
         Material bgMaterial, Material primMaterial,
-        Func<TransformableSO> CreatePrimitiveF,
+        Func<SceneObject> CreatePrimitiveF,
         IGameObjectGenerator customGenerator = null
         )
     {
@@ -300,7 +300,7 @@ class SetupBasicVRCockpit : ICockpitInitializer
 
                 // combine two selected SOs into a GroupSO
                 if (selected.Count == 2)
-                    SceneUtil.CreateGroupSO(selected[0] as TransformableSO, selected[1] as TransformableSO);
+                    SceneUtil.CreateGroupSO(selected[0], selected[1]);
 
                 // [RMS] alternative, does deep-copy of internal GOs. This works OK except
                 //   that the frame of the combined object ends up at the origin...

@@ -12,7 +12,7 @@ public class VRSampleSceneConfig : BaseSceneConfig
     public override FContext Context { get { return context; } }
 
     // Use this for initialization
-    void Awake()
+    public override void Awake()
     {
         // if we need to auto-configure Rift vs Vive vs (?) VR, we need
         // to do this before any other F3 setup, because MainCamera will change
@@ -76,12 +76,12 @@ public class VRSampleSceneConfig : BaseSceneConfig
         GameObject groundPlane = GameObject.Find("GroundPlane");
         context.Scene.AddWorldBoundsObject(groundPlane);
 
-        TransformableSO focusSO = null;
+        SceneObject focusSO = null;
 
         // wrap existing complex GameObject named capsule1 as a SceneObject
         GameObject capsuleGO = GameObject.Find("capsule1");
         if (capsuleGO != null) {
-            TransformableSO capsuleSO = UnitySceneUtil.WrapAnyGameObject(capsuleGO, context, true);
+            SceneObject capsuleSO = UnitySceneUtil.WrapAnyGameObject(capsuleGO, context, true);
             focusSO = capsuleSO;
         }
 

@@ -13,7 +13,7 @@ public class VRPhotoSceneConfig : BaseSceneConfig
     public override FContext Context { get { return context; } }
 
     // Use this for initialization
-    void Awake()
+    public override void Awake()
     {
         // if we need to auto-configure Rift vs Vive vs (?) VR, we need
         // to do this before any other F3 setup, because MainCamera will change
@@ -58,7 +58,7 @@ public class VRPhotoSceneConfig : BaseSceneConfig
         context.ToolManager.RegisterToolType(DrawPrimitivesTool.Identifier, new DrawPrimitivesToolBuilder());
         context.ToolManager.RegisterToolType(DrawSurfaceCurveTool.Identifier, new DrawSurfaceCurveToolBuilder() {
             AttachCurveToSurface = true,
-            DefaultSamplingRate = 0.0025f, DefaultSurfaceOffset = 0.0025f,
+            DefaultSamplingRateS = 0.0025f, DefaultSurfaceOffsetS = 0.0025f,
             CurveMaterialF = () => { var mat = context.Scene.DefaultCurveSOMaterial.Clone(); mat.RGBColor = Colorf.VideoRed; return mat; }
         } );
         context.ToolManager.SetActiveToolType(DrawSurfaceCurveTool.Identifier, ToolSide.Right);

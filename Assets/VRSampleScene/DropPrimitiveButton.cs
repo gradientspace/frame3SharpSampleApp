@@ -12,7 +12,7 @@ namespace f3
     public class DropPrimitiveButton : HUDButton
     {
         public FScene TargetScene { get; set; }
-        public Func<TransformableSO> CreatePrimitive { get; set; }
+        public Func<SceneObject> CreatePrimitive { get; set; }
 
         public DropPrimitiveButton()
         {
@@ -36,7 +36,7 @@ namespace f3
 
         Frame3f lastHitF;
         SceneObject lastHitObject;
-        TransformableSO newPrimitive;
+        SceneObject newPrimitive;
         float fPrimShift;
         float fPrimScale;
 
@@ -51,12 +51,12 @@ namespace f3
             // rotation around normal. 
             Frame3f hitF = TargetScene.SceneFrame;
             Vector3 targetAxis = hitF.GetAxis(1);
-            if (hit.hitSO is TransformableSO)
-                hitF = (hit.hitSO as TransformableSO).GetLocalFrame(CoordSpace.WorldCoords);
+            if (hit.hitSO is SceneObject)
+                hitF = (hit.hitSO as SceneObject).GetLocalFrame(CoordSpace.WorldCoords);
             bool bUseLocal = 
                 (TargetScene.Context.TransformManager.ActiveFrameType == FrameType.LocalFrame);
-            if (bUseLocal && hit.hitSO is TransformableSO) {
-                hitF = (hit.hitSO as TransformableSO).GetLocalFrame(CoordSpace.WorldCoords);
+            if (bUseLocal && hit.hitSO is SceneObject) {
+                hitF = (hit.hitSO as SceneObject).GetLocalFrame(CoordSpace.WorldCoords);
                 targetAxis = hitF.GetAxis(1);
             }
             // if normal is parallel to target, this would become unstable, so use another axis
