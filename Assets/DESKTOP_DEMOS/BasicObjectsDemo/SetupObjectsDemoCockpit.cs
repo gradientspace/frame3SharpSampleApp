@@ -70,8 +70,8 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
         });
 
 
-        float fToolsX = 35.0f;
-        float fToolButtonRadius = 0.08f;
+        //float fToolsX = 35.0f;
+        //float fToolButtonRadius = 0.08f;
 
         // buttons for draw-primitive tool and cancel-tool button
         
@@ -262,7 +262,7 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
                 Ray3f cursorRay = context.MouseController.CurrentCursorWorldRay();
                 AnyRayHit hit = null;
                 if (context.Scene.FindSceneRayIntersection(cursorRay, out hit)) {
-                    context.ActiveCamera.Manipulator().ScenePanFocus(context.Scene, context.ActiveCamera, hit.hitPos, true);
+                    context.ActiveCamera.Animator().AnimatePanFocus(hit.hitPos, CoordSpace.WorldCoords, 0.3f);
                 }
                 return true;
 

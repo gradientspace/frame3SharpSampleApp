@@ -248,7 +248,7 @@ class PhotoToolCockpit : ICockpitInitializer
                 Ray3f cursorRay = context.MouseController.CurrentCursorWorldRay();
                 AnyRayHit hit = null;
                 if (context.Scene.FindSceneRayIntersection(cursorRay, out hit)) {
-                    context.ActiveCamera.Manipulator().ScenePanFocus(context.Scene, context.ActiveCamera, hit.hitPos, true);
+                    context.ActiveCamera.Animator().AnimatePanFocus(hit.hitPos, CoordSpace.WorldCoords, 0.3f);
                 }
                 return true;
 

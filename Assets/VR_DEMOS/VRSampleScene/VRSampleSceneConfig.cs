@@ -107,8 +107,7 @@ public class VRSampleSceneConfig : BaseSceneConfig
         // center the camera on the capsule assembly
         if (focusSO != null) {
             Vector3f centerPt = focusSO.GetLocalFrame(CoordSpace.WorldCoords).Origin;
-            context.ActiveCamera.Manipulator().ScenePanFocus(
-                context.Scene, context.ActiveCamera, centerPt, true);
+            context.ActiveCamera.Animator().AnimatePanFocus(centerPt, CoordSpace.WorldCoords, 0.3f);
         }
 
     }
