@@ -28,8 +28,8 @@ public class VRSampleSceneConfig : BaseSceneConfig
         // this will move the ground plane down, but the bunnies will be floating...
         //SceneGraphConfig.InitialSceneTranslate = -4.0f * Vector3f.AxisY;
         SceneGraphConfig.DefaultSceneCurveVisualDegrees = 0.5f;
-        SceneGraphConfig.DefaultPivotVisualDegrees = 2.3f;
-        SceneGraphConfig.DefaultAxisGizmoVisualDegrees = 25.0f;
+        SceneGraphConfig.DefaultPivotVisualDegrees = 1.5f;
+        SceneGraphConfig.DefaultAxisGizmoVisualDegrees = 10.0f;
 
 
         SceneOptions options = new SceneOptions();

@@ -21,8 +21,8 @@ public class ObjectsDemoSceneConfig : BaseSceneConfig
 
         // set up some defaults
         SceneGraphConfig.DefaultSceneCurveVisualDegrees = 0.5f;
-        SceneGraphConfig.DefaultPivotVisualDegrees = 2.3f;
-        SceneGraphConfig.DefaultAxisGizmoVisualDegrees = 25.0f;
+        SceneGraphConfig.DefaultPivotVisualDegrees = 1.5f;
+        SceneGraphConfig.DefaultAxisGizmoVisualDegrees = 10.0f;
 
 
         SceneOptions options = new SceneOptions();

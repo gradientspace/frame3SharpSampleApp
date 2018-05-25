@@ -83,7 +83,10 @@ class SetupBasicVRCockpit : ICockpitInitializer
 
         // spatial device does camera manipulation via Behavior
         //   (mouse/gamepad currently do not, but will in future!)
+        // view manip w/ shoulder + pad/stick
         cockpit.InputBehaviors.Add(new SpatialDeviceViewManipBehavior(cockpit) { Priority = 2 });
+        // view manp w/ either shoulder
+        // cockpit.InputBehaviors.Add(new SpatialDeviceGrabViewBehavior(cockpit) { Priority = 2 });
         cockpit.InputBehaviors.Add(new SpatialDeviceGrabBehavior(cockpit) { Priority = 3 });
 
         // selection / multi-selection behaviors
