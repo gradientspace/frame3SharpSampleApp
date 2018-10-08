@@ -7,6 +7,15 @@ These samples are released under the MIT License, feel free to use them as a sta
 Questions? Contact Ryan Schmidt [@rms80](http://www.twitter.com/rms80) / [gradientspace](http://www.gradientspace.com)
 
 
+# Usage
+
+**CRITICAL: THIS REPO LINKS TO SUBMODULES**. The majority of git clients do not automatically check out submodules!! If when you first check out this project, the **Assets/geometry3Sharp** folder is empty, you need to manually check out the submodules. The git command to grab all of them is:
+
+    **git submodule update --init --recursive**
+
+Once you have done this, you should be able to open the Unity project without errors, and open and run the sample scenes.
+
+
 # VRSampleScene 
 
 Basic VR interface where you can add Boxes and Cylinders via either double-clicking or drag-dropping from the cockpit HUD. You can also use a Draw Primitive Tool to draw Boxes and Cylinders interactively (click on the drag-drop buttons  during the tool to change the current primitive type).
