@@ -54,6 +54,16 @@ public class VRSampleSceneConfig : BaseSceneConfig
 
         // if you had other tools, you would register them here.
         context.ToolManager.RegisterToolType(DrawPrimitivesTool.Identifier, new DrawPrimitivesToolBuilder());
+        context.ToolManager.RegisterToolType(DrawSurfaceCurveTool.Identifier, new DrawSurfaceCurveToolBuilder() {
+            AttachCurveToSurface = false,
+            DefaultSamplingRateS = 0.0025f, DefaultSurfaceOffsetS = 0.0025f,
+            CurveMaterialF = () => { var mat = context.Scene.DefaultCurveSOMaterial.Clone(); mat.RGBColor = Colorf.VideoRed; return mat; }
+        });
+        context.ToolManager.RegisterToolType(DrawSpaceCurveTool.Identifier, new DrawSpaceCurveToolBuilder() {
+            AttachCurveToTarget = false,
+            DefaultSamplingRateS = 0.01f,
+            CurveMaterialF = () => { var mat = context.Scene.DefaultCurveSOMaterial.Clone(); mat.RGBColor = Colorf.VideoBlue; return mat; }
+        });
         context.ToolManager.SetActiveToolType(DrawPrimitivesTool.Identifier, ToolSide.Right);
 
         // Set up standard scene lighting if requested

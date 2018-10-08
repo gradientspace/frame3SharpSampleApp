@@ -57,7 +57,7 @@ class PhotoToolCockpit : ICockpitInitializer
 
         // buttons for draw-primitive tool and cancel-tool button
         
-        ActivateToolButton drawPrimButton = add_tool_button(cockpit, DrawPrimitivesTool.Identifier, fHUDRadius,
+        ActivateToolButton drawPrimButton = add_tool_button(cockpit, DrawSurfaceCurveTool.Identifier, fHUDRadius,
             fToolsX - fButtonsSpacing, fButtonsY, fToolButtonRadius, bgMaterial, primMaterial,
             new toolInfo() { identifier = DrawSurfaceCurveTool.Identifier, sMeshPath = "draw_primitive", fMeshScaleFudge = 1.2f });
         cockpit.AddUIElement(drawPrimButton);

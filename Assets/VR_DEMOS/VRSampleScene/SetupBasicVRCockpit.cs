@@ -36,16 +36,16 @@ class SetupBasicVRCockpit : ICockpitInitializer
 
         float fButtonsY = -50.0f; // degrees
         float fButtonsSpacing = 15.0f;
-        float fPrimitivesX = -35.0f; 
+        float fPrimitivesX = -35.0f;
 
         DropPrimitiveButton cylinderButton =
-            add_primitive_button(cockpit, "create_cylinder", fHUDRadius, fPrimitivesX, fButtonsY, 
+            add_primitive_button(cockpit, "create_cylinder", fHUDRadius, fPrimitivesX, fButtonsY,
                 PrimitiveType.Cylinder, SOTypes.Cylinder, 0.7f, bgMaterial, primMaterial,
                 () => { return new CylinderSO().Create(cockpit.Scene.DefaultSOMaterial); });
         cockpit.AddUIElement(cylinderButton);
 
         DropPrimitiveButton boxButton =
-            add_primitive_button(cockpit, "create_box", fHUDRadius, fPrimitivesX+fButtonsSpacing, fButtonsY,
+            add_primitive_button(cockpit, "create_box", fHUDRadius, fPrimitivesX + fButtonsSpacing, fButtonsY,
                 PrimitiveType.Cube, SOTypes.Box, 0.8f, bgMaterial, primMaterial,
                 () => { return new BoxSO().Create(cockpit.Scene.DefaultSOMaterial); });
         cockpit.AddUIElement(boxButton);
@@ -62,8 +62,13 @@ class SetupBasicVRCockpit : ICockpitInitializer
             new toolInfo() { identifier = DrawPrimitivesTool.Identifier, sMeshPath = "draw_primitive", fMeshScaleFudge = 1.2f });
         cockpit.AddUIElement(drawPrimButton);
 
-        ActivateToolButton cancelButton = add_tool_button(cockpit, "cancel", fHUDRadius,
+        ActivateToolButton drawCurveButton = add_tool_button(cockpit, DrawSpaceCurveTool.Identifier, fHUDRadius,
             fToolsX, fButtonsY, fToolButtonRadius, bgMaterial, primMaterial,
+            new toolInfo() { identifier = DrawSpaceCurveTool.Identifier, sMeshPath = "draw_curve", fMeshScaleFudge = 1.2f });
+        cockpit.AddUIElement(drawCurveButton);
+
+        ActivateToolButton cancelButton = add_tool_button(cockpit, "cancel", fHUDRadius,
+            fToolsX + fButtonsSpacing, fButtonsY, fToolButtonRadius, bgMaterial, primMaterial,
             new toolInfo() { identifier = "cancel", sMeshPath = "cancel", fMeshScaleFudge = 1.2f });
         cockpit.AddUIElement(cancelButton);
 
@@ -81,8 +86,11 @@ class SetupBasicVRCockpit : ICockpitInitializer
         cockpit.InputBehaviors.Add(new VRGamepadUIBehavior(cockpit.Context) { Priority = 0 });
         cockpit.InputBehaviors.Add(new VRSpatialDeviceUIBehavior(cockpit.Context) { Priority = 0 });
 
+
         // spatial device does camera manipulation via Behavior
         //   (mouse/gamepad currently do not, but will in future!)
+
+        cockpit.InputBehaviors.Add(new TwoHandViewManipBehavior(cockpit) { Priority = 1 });
         // view manip w/ shoulder + pad/stick
         cockpit.InputBehaviors.Add(new SpatialDeviceViewManipBehavior(cockpit) { Priority = 2 });
         // view manp w/ either shoulder
