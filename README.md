@@ -11,7 +11,7 @@ Questions? Contact Ryan Schmidt [@rms80](http://www.twitter.com/rms80) / [gradie
 
 **CRITICAL: THIS REPO LINKS TO SUBMODULES**. The majority of git clients do not automatically check out submodules!! If when you first check out this project, the **Assets/geometry3Sharp** folder is empty, you need to manually check out the submodules. The git command to grab all of them is:
 
-    **git submodule update --init --recursive**
+    git submodule update --init --recursive
 
 Once you have done this, you should be able to open the Unity project without errors, and open and run the sample scenes.
 
