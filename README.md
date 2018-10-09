@@ -68,5 +68,4 @@ There are several scenes provided with different configurations. All of these sc
 
 The Frame3 framework is configured in the **VRSampleSceneConfig.cs** script, and the Cockpit (HUD UI, controller behaviors) is configured in **SetupBasicVRCockpit.cs**.
 
-Several of the scenes have existing 3D objects in them. These are converted into Frame3 *SceneObject*s at the bottom of  VRSampleSceneConfig.cs. 
 
