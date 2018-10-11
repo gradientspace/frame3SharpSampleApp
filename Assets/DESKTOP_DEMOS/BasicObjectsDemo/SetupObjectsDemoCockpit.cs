@@ -60,7 +60,7 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
 
 
         primitives_list.Create();
-        primitives_list.Name = "button_bar";
+        primitives_list.Name = "prims_button_bar";
 
         // align primitives_list to bottom-left
         layout.Add(primitives_list, new LayoutOptions() {
@@ -70,21 +70,37 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
         });
 
 
-        //float fToolsX = 35.0f;
-        //float fToolButtonRadius = 0.08f;
+
+
+        HUDElementList tool_buttons_list = new HUDElementList() {
+            Width = 5 * buttonDiam,
+            Height = buttonDiam,
+            Spacing = 25 * pixelScale,
+            HorzAlign = HorizontalAlignment.Right,
+            Direction = HUDElementList.ListDirection.Horizontal
+        };
 
         // buttons for draw-primitive tool and cancel-tool button
-        
-        //ActivateToolButton drawPrimButton = add_tool_button(cockpit, DrawPrimitivesTool.Identifier, fHUDRadius,
-        //    fToolsX - fButtonsSpacing, fButtonsY, fToolButtonRadius, bgMaterial, primMaterial,
-        //    new toolInfo() { identifier = DrawPrimitivesTool.Identifier, sMeshPath = "draw_primitive", fMeshScaleFudge = 1.2f });
-        //cockpit.AddUIElement(drawPrimButton);
 
-        //ActivateToolButton cancelButton = add_tool_button(cockpit, "cancel", fHUDRadius,
-        //    fToolsX, fButtonsY, fToolButtonRadius, bgMaterial, primMaterial,
-        //    new toolInfo() { identifier = "cancel", sMeshPath = "cancel", fMeshScaleFudge = 1.2f });
-        //cockpit.AddUIElement(cancelButton);
+        ActivateToolButton drawPrimButton = create_tool_button(cockpit, DrawPrimitivesTool.Identifier,
+            buttonDiam/2, bgMaterial, primMaterial,
+            new toolInfo() { identifier = DrawPrimitivesTool.Identifier, sMeshPath = "draw_primitive", fMeshScaleFudge = 1.2f });
+        tool_buttons_list.AddListItem(drawPrimButton);
 
+        ActivateToolButton cancelButton = create_tool_button(cockpit, "cancel",
+            buttonDiam / 2, bgMaterial, primMaterial,
+            new toolInfo() { identifier = "cancel", sMeshPath = "cancel", fMeshScaleFudge = 1.2f });
+        tool_buttons_list.AddListItem(cancelButton);
+
+        tool_buttons_list.Create();
+        tool_buttons_list.Name = "tool_button_bar";
+
+        // align tool_buttons_list to bottom-right
+        layout.Add(tool_buttons_list, new LayoutOptions() {
+            Flags = LayoutFlags.None,
+            PinSourcePoint2D = LayoutUtil.BoxPointF(tool_buttons_list, BoxPosition.BottomRight),
+            PinTargetPoint2D = LayoutUtil.BoxPointF(screenContainer, BoxPosition.BottomRight, 25 * pixelScale * new Vector2f(-1,1) )
+        });
 
 
         // Configure interaction behaviors
@@ -190,8 +206,7 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
     }
     ActivateToolButton[] activeButtons = new ActivateToolButton[2];
 
-    ActivateToolButton add_tool_button(Cockpit cockpit, string sName,
-        float fHUDRadius, float dx, float dy,
+    ActivateToolButton create_tool_button(Cockpit cockpit, string sName,
         float fButtonRadius,
         Material bgMaterial, Material activeMaterial, toolInfo info)
     {
@@ -200,7 +215,7 @@ class SetupObjectsDemoCockpit : ICockpitInitializer
             ToolType = info.identifier
         };
         button.CreateMeshIconButton(fButtonRadius, info.sMeshPath, bgMaterial, info.fMeshScaleFudge);
-        HUDUtil.PlaceInSphere(button, fHUDRadius, dx, dy);
+        //HUDUtil.PlaceInSphere(button, fHUDRadius, dx, dy);
         button.Name = sName;
 
         if (info.identifier == "cancel") {
